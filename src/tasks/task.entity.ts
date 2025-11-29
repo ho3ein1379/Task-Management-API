@@ -4,11 +4,13 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../users/user.entity';
 import { Category } from '../categories/categories.entity';
+import { Attachment } from '../upload/attachment.entity';
 
 export enum TaskStatus {
   TODO = 'todo',
@@ -58,6 +60,9 @@ export class Task {
 
   @Column({ nullable: true })
   categoryId: string;
+
+  @OneToMany(() => Attachment, (attachment) => attachment.task)
+  attachments: Attachment[];
   @CreateDateColumn()
   createdAt: Date;
   @UpdateDateColumn()
