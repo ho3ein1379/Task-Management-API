@@ -1,12 +1,14 @@
 import {
   Column,
   CreateDateColumn,
+  Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Task } from '../tasks/task.entity';
 
+@Entity('attachments')
 export class Attachment {
   @PrimaryGeneratedColumn('uuid')
   id: string;
