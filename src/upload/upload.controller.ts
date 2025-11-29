@@ -25,7 +25,7 @@ export class UploadController {
     @Param('taskId') taskId: string,
     @CurrentUser() user: User,
   ): Promise<Attachment> {
-    return this.uploadService.uploadFile(file, taskId, user.id);
+    return this.uploadService.uploadFile(file, taskId, user?.id);
   }
 
   @Get('task/:taskId')
@@ -33,7 +33,7 @@ export class UploadController {
     @Param('taskId') taskId: string,
     @CurrentUser() user: User,
   ) {
-    return this.uploadService.getTaskAttachments(taskId, user.id);
+    return this.uploadService.getTaskAttachments(taskId, user?.id);
   }
 
   @Get('download/:id')
@@ -42,13 +42,13 @@ export class UploadController {
     @CurrentUser() user: User,
     @Res() response: express.Response,
   ) {
-    const attachment = await this.uploadService.getAttachment(id, user.id);
+    const attachment = await this.uploadService.getAttachment(id, user?.id);
 
     response.download(attachment.path, attachment.originalName);
   }
 
   @Get(':id')
   async deleteAttachment(@Param('id') id: string, @CurrentUser() user: User) {
-    return this.uploadService.deleteAttachment(id, user.id);
+    return this.uploadService.deleteAttachment(id, user?.id);
   }
 }
